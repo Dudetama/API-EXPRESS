@@ -23,6 +23,12 @@ app.get('/produtos/:id', (req,res) => {
     }res.json(produto);
 });
 
+app.get('/produtos', (req, res) => {
+    const categoria = req.query.categoria
+    const produtosFiltrados = produtos.filter(p => p.categoria === categoria)
+    res.json(produtosFiltrados);
+});
+
 app.post('/usuario', () => {
     const novoUsuario = {
         id: usuarios.length +1,

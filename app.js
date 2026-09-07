@@ -3,14 +3,24 @@ import express from 'express'
 const app = express()
 const PORT = 3000
 
+const produtos = [
+    {id: 4, nome: 'ponei'},
+    {id: 5, nome: 'disco'},
+    {id: 6, nome: 'cd'}
+]
+
 const usuarios = [
     {id: 1, nome: 'Gabriel'},
     {id: 2, nome: 'Breguedo'},
     {id: 3, nome: 'Daris Nidere Angelina da Silva'}
 ];
 
-app.get('/', (req,res) => {
-    res.send('Bem-vindo ao Express!')
+app.get('/produtos/:id', (req,res) => {
+    const id = req.params.id;
+    const produto = produtos.find(p => p.id === parseInt (id));
+    if (!produto){
+        return res.status(404).json({error: "Produto não encontrado"})
+    }res.json(produto);
 });
 
 app.post('/usuario', () => {

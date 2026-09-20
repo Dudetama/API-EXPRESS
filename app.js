@@ -21,6 +21,10 @@ app.get("/produtos", (req, res) => {
   res.json(produtos);
 });
 
+app.get('/', (req, res) => {
+res.end('API de tarefas no ar!')
+});
+
 app.post("/produto", (req, res) => {
   const nome = req.body.nome;
   const categoria = req.body.categoria;

@@ -52,6 +52,16 @@ app.get('/tarefas', (req, res) => {
     : res.json(tarefas);
 });
 
+app.post('/tarefas', (req, res) => {
+    const titulo = req.body.titulo;
+    tarefas.push({
+    id: tarefas.length + 1,
+    titulo: titulo,
+    concluida: false
+});
+    res.status(201).json(tarefas[tarefas.length - 1]);
+});
+
 app.post("/produto", (req, res) => {
   const nome = req.body.nome;
   const categoria = req.body.categoria;

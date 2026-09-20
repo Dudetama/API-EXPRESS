@@ -35,6 +35,15 @@ app.get('/tarefas', (req, res) => {
   res.json(tarefas);
 });
 
+app.get('/tarefas/:id', (req, res) => {
+    const id = req.params.id;
+    const tarefa = tarefas.find((t) => t.id === parseInt(id));
+    if (!tarefa) {
+        return res.status(404).json({ error: "Tarefa não encontrada!" });
+    }
+    res.status(200).json(tarefa);
+});
+
 app.post("/produto", (req, res) => {
   const nome = req.body.nome;
   const categoria = req.body.categoria;

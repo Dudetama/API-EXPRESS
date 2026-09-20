@@ -6,6 +6,12 @@ app.use(express.json());
 
 const PORT = 3000;
 
+const tarefas = [
+    { id: 1, titulo: "Fazer compras", concluida: false },
+    { id: 2, titulo: "Lavar o carro", concluida: true },
+    { id: 3, titulo: "Passear com o cachorro", concluida: false },
+];
+
 const produtos = [
   { id: 1, nome: "Teclado", categoria: "periféricos" },
   { id: 2, nome: "Controle", categoria: "periféricos" },
@@ -23,6 +29,10 @@ app.get("/produtos", (req, res) => {
 
 app.get('/', (req, res) => {
 res.end('API de tarefas no ar!')
+});
+
+app.get('/tarefas', (req, res) => {
+  res.json(tarefas);
 });
 
 app.post("/produto", (req, res) => {

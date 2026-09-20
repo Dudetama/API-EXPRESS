@@ -42,6 +42,14 @@ app.get('/tarefas/:id', (req, res) => {
         return res.status(404).json({ error: "Tarefa não encontrada!" });
     }
     res.status(200).json(tarefa);
+
+});
+
+app.get('/tarefas', (req, res) => {
+    const concluida = req.query.concluida;
+    concluida === "true" || concluida === "false"
+    ? res.json(tarefas.filter((t) => t.concluida === (concluida === "true")))
+    : res.json(tarefas);
 });
 
 app.post("/produto", (req, res) => {

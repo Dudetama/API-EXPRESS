@@ -62,6 +62,37 @@ app.post('/tarefas', (req, res) => {
     res.status(201).json(tarefas[tarefas.length - 1]);
 });
 
+const autenticar = (req, res, next) => {
+  console.log('Autenticação verificada!!')
+  next();
+};
+const validarCorpo = (req, res, next) => {
+  if (!req.body.titulo) {
+        return res.status(400).json({
+            error: 'O título é obrigatório'
+        });
+    }
+  next();
+};
+const registrarLog = (req, res, next) => {
+  console.log(`Nova tarefa sendo criada: ${req.body.titulo}`);
+  next();
+};
+
+app.post('/tarefas', [authenticar, validarCorpo, registrarLog] , (req, res) => {
+  const titulo = req.body.titulo;
+
+  const novaTarefa = {
+    id: tarefas.length + 1,
+    titulo: titulo,
+    concluida: false
+  };
+
+  tarefas.push(novaTarefa);
+
+  res.status(201).json(novaTarefa);
+});
+
 app.post("/produto", (req, res) => {
   const nome = req.body.nome;
   const categoria = req.body.categoria;
